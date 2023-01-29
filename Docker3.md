@@ -6,7 +6,7 @@
 
 - We can use AWS, Google Cloud, Tencent Cloud as well.
 
-- For Alibaba Cloud, the detailed process: Login your Alibaba Cloud account→Container Repository(ACR)https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors→实例列表→个人实例→镜像仓库→创建镜像仓库→填写信息，代码源：本地仓库
+- For Alibaba Cloud, the detailed process: Login your Alibaba Cloud account→Container Repository(ACR)https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors →实例列表→个人实例→镜像仓库→创建镜像仓库→填写信息，代码源：本地仓库
   - You save different tags/versions of the same image. In this case, our goal is to push the *My-App* image to the private repository we just created.
 
 ### Push the Image to Private Repository
