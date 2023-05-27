@@ -1,0 +1,125 @@
+microservices: #objects #lists of object
+  - app: user-authentication #key-value pairs attributes
+    port: 9000
+    version: 1.7
+    deployed: false
+  - app: shopping-cart 
+    port: 9002
+    version: !!seq 
+    - 1.9
+    - 2.0
+    - 2.1
+    # or [1.9, 2.0, 2.1] , different data types in bracket[] is allowed.
+# we can also write in dictionary form: {app: shopping-cart, port: 9002, version: 1.9} to store key-value pairs
+
+# key-value pairs are mapping, order is unimportant in maps
+---
+
+#below is a block
+microservices: #list of single values
+  - user-authentication
+  - shopping-cart
+  - Shopping-cart
+
+---
+
+multilineString: |   # multi-line string
+  this is a multiline \n string
+  and this is the next line
+  the third line
+
+singleLineString: >  # single line string
+  this is a single line string
+  which should be all on one line
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.name }} #placeholder
+
+---
+#Specify the data type
+zero: !!int 0
+positiveNum: !!int 1
+color: !!color blue
+
+host1:
+  &common-host # anchor
+  os: linux
+  arch: x86_64
+  name: ~
+host2: *common-host #alias
+
+---
+
+#sparse sequence: some of keys will be empty
+sparse sequence:
+  - Doris
+  - Cathy
+  - 
+  - Franklin
+  - David
+
+#nested sequence:
+- 
+  - mango
+  - apple
+  - cherry
+  - coconut
+- 
+  - ClassNumber
+  - Grade
+  - StudentName
+  - StudentID
+
+#nested map
+name: DorisWang
+role: #or {job: Data Scientist, age: 22}
+  job: Data Scientist
+  age: 22
+
+#pairs: keys may have multiple values
+#it can be an array of hash tables
+pairExample: !!pairs
+  - job: MLE
+  - job: Data Scientist
+
+# another written way:
+pairExample: !!pairs [job: MLE, job: Data Scientist]
+
+# !!set will let we have unique values
+names: !!set
+  ? January
+  ? March
+  ? October
+
+# Dictionary
+# !!omap
+people: !!omap
+  - Doris: #it can have a sequence
+      name: QiutingWang
+      age: 22
+      height: 170
+  - Rachel:
+      name: XiaoZheng
+      age: 20
+      height: 168
+
+# anchor and reusing some properties
+traits: &likes
+  favoriteFood: Sushi
+  dislikes: mutton
+person1:
+  name: Doris Wang
+  <<: *likes
+person2:
+  name: Alyssa Jiang
+  <<: *likes
+  dislikes: coriander #update dislike to coriander, instead of mutton any more.
+person3:
+  name: Coral Zhang
+  <<: *likes
+
+...
