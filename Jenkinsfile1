@@ -17,7 +17,7 @@ pipeline {
         stage("init") {
             steps {
                 script {
-                   gv = load "script.groovy" 
+                   gv = load "GroovyFunctions.groovy" 
                 }
             }
         }
@@ -31,7 +31,6 @@ pipeline {
                 script {
                     gv.buildApp()
                 }
-                echo "Building version ${NEW_VERSION}" //if we want it to be a string, we need double quotation mark.
                 sh "mvn install"
             }
         }
@@ -60,7 +59,6 @@ pipeline {
                 ]){
                   sh "some script ${USER} ${PWD}"
                 }
-                echo "deploying version ${params.VERSION}"
             }
         }
     }  
